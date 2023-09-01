@@ -1,17 +1,25 @@
+// 1. Node modules
 import React, { useState, useEffect } from "react";
+
+// 2. Project file
 import "../style/pages/todolist.css";
 import Item from "../components/Item";
 
-const TodoList = ({ user, onSignout }) => {
+// Functionl Component (FC) with 1 line export shorcut
+export default function TodoList({ user, onSignout }) {
+  // 4. Local state
   const [todoItems, setTodoItems] = useState([]);
   const [newItem, setNewItem] = useState({ title: "", price: "", image: "" });
-  const [ItemImageUrl, setItemImageUrl] = useState([]);
+  const [itemImageUrl, setItemImageUrl] = useState([]);
 
+  // 5. Properties
+  const endpoint_TodoitemsList = `http://localhost:8080/todo/${user}`;
+  const endpoint_AddItem = `http://localhost:8080/todo/addItem/${user}`;
+  // 6. Methods
   useEffect(() => {
-    // Fetch todo items after user logs in
-    const fetchTodoItems = async (user) => {
+    const fetchTodoItems = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/todo/${user}`, {
+        const response = await fetch(endpoint_TodoitemsList, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -21,33 +29,29 @@ const TodoList = ({ user, onSignout }) => {
         if (response.ok) {
           const data = await response.json();
           setTodoItems(data);
-          console.log(response);
         } else {
           console.log(response);
-          alert("There is not any item belong to you");
+          alert("There are no items belonging to you.");
         }
       } catch (error) {
-        alert("Sorry we could not load the data");
+        alert("Sorry, we could not load the data.");
         console.error(error);
       }
     };
-    fetchTodoItems(user);
+    fetchTodoItems();
   }, [user]);
-
+  // 6. Methods
   const handleDeleteItem = async (itemId) => {
+    const endpoint_DeleteItem = `http://localhost:8080/todo/deleteItem/${itemId}`;
     try {
-      const response = await fetch(
-        `http://localhost:8080/todo/deleteItem/${itemId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(endpoint_DeleteItem, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (response.ok) {
-        // Remove the deleted item from the todoItems state
         setTodoItems((prevItems) =>
           prevItems.filter((item) => item.id !== itemId)
         );
@@ -59,26 +63,23 @@ const TodoList = ({ user, onSignout }) => {
       console.error(error);
     }
   };
-
-  const handleAddItem = async (user) => {
+  // 6. Methods
+  const handleAddItem = async () => {
     const formData = new FormData();
     formData.append("title", newItem.title);
     formData.append("price", newItem.price);
     formData.append("image", newItem.image);
-    console.log(formData);
+
     try {
-      const response = await fetch(
-        `http://localhost:8080/todo/addItem/${user}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(endpoint_AddItem, {
+        method: "POST",
+        body: formData,
+      });
 
       if (response.ok) {
         const newItemData = await response.json();
         setTodoItems((prevItems) => [...prevItems, newItemData]);
-        setNewItem({ title: "", price: "", image: "" }); // Clear the input fields
+        setNewItem({ title: "", price: "", image: "" });
       } else {
         alert("Failed to add item.");
       }
@@ -87,42 +88,42 @@ const TodoList = ({ user, onSignout }) => {
       console.error(error);
     }
   };
+  // 6. Methods
   const handleImageUpload = (e) => {
-    const selectedFile = e.target.files[0]; // Get the selected file
+    const selectedFile = e.target.files[0];
     if (selectedFile) {
       setNewItem({ ...newItem, image: selectedFile });
     }
   };
-
+  // 6. Methods
   const handleImageDownload = async (itemId) => {
+    const endpoint_ViewImage = `http://localhost:8080/todo/display?id=${itemId}`;
     try {
-      // Make a GET request to your server's /display endpoint with the item's ID
-      const response = await fetch(
-        `http://localhost:8080/todo/display?id=${itemId}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(endpoint_ViewImage, {
+        method: "GET",
+      });
 
       if (response.ok) {
-        // Convert the response data to a blob
         const imageBlob = await response.blob();
-
-        // Create a data URL from the blob to display the image
         const imageUrl = URL.createObjectURL(imageBlob);
-
-        // Set the image URL in your component state
         setItemImageUrl(imageUrl);
       } else {
-        // Handle the case when the image retrieval fails
         console.error("Failed to download image");
       }
     } catch (error) {
       console.error("Error while downloading image:", error);
     }
   };
-
-  const Items = todoItems.map((item) => <Item key={item.id} item={item} />);
+  // 7. Components
+  const Items = todoItems.map((item) => (
+    <Item
+      key={item.id}
+      item={item}
+      onImageDownload={() => handleImageDownload(item.id)}
+      onDelete={() => handleDeleteItem(item.id)}
+    />
+  ));
+  // 8. Render
   return (
     <div className="todo-list-container">
       <h3>Welcome, {user}!</h3>
@@ -130,21 +131,7 @@ const TodoList = ({ user, onSignout }) => {
         Sign Out
       </button>
       <h3>Your Todo List:</h3>
-      <ul>
-        {todoItems.map((item) => (
-          <li key={item.id} className="todo-item">
-            <div>Title: {item.title}</div>
-            <div>Price: {item.price}</div>
-            <img
-              src={`data:image/jpeg;base64,${btoa(
-                String.fromCharCode(...new Uint8Array(handleImageDownload(1)))
-              )}`}
-              alt="Downloaded Todo Item Image"
-            />
-            <button onClick={() => handleDeleteItem(item.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <ul>{Items}</ul>
       <div className="add-item-container">
         <h2>Add New Item</h2>
         <input
@@ -166,13 +153,10 @@ const TodoList = ({ user, onSignout }) => {
           placeholder="Image URL"
           onChange={handleImageUpload}
         />
-
-        <button className="add-button" onClick={() => handleAddItem(user)}>
+        <button className="add-button" onClick={handleAddItem}>
           Add Item
         </button>
       </div>
     </div>
   );
-};
-
-export default TodoList;
+}

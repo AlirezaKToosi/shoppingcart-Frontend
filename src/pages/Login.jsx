@@ -30,7 +30,7 @@ const Login = ({ onLogin }) => {
       console.error(error);
     }
   };
-
+  // 8. Render
   return (
     <div id="login">
       <h2>Login</h2>
