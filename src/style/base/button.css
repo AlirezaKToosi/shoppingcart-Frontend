@@ -1,0 +1,24 @@
+.buttonMain {
+  display: block;
+  height: 44px;
+  width: 200px;
+  background-color: #0058a3; /* blue color */
+  border-radius: 44px;
+  border-width: 0;
+  color: white;
+  font-family: "NotoSans-Bold";
+  margin: 15px auto;
+  cursor: pointer;
+}
+.signout-button {
+  display: block;
+  height: 44px;
+  width: 200px;
+  background-color: #013b6e; /* blue color */
+  border-radius: 44px;
+  border-width: 0;
+  color: white;
+  font-family: "NotoSans-Bold";
+  margin: 15px auto;
+  cursor: pointer;
+}

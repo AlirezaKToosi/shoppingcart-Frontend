@@ -1,0 +1,10 @@
+.todolist-title {
+  width: "100%";
+  text-align: center;
+  font-family: "Roboto";
+  font-weight: "700";
+  font-size: 10px;
+  line-height: 35px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}

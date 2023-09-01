@@ -1,0 +1,8 @@
+.todo-list-container {
+  width: 375px;
+  height: 667px;
+  background-color: white;
+  padding: 20px;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
