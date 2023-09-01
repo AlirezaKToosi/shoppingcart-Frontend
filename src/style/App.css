@@ -1,11 +1,11 @@
 /* App.css */
-.login-container {
+#login {
   text-align: center;
   margin: 100px auto;
   width: 300px;
 }
 
-.todo-list-container {
+#todo-list {
   text-align: center;
   margin: 100px auto;
   width: 300px;

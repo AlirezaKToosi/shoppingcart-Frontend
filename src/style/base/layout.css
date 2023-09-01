@@ -1,4 +1,15 @@
 body {
-  background-color: lightgray;
-  height: 100vh;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.App {
+  background-color: #ffffff;
+}
+.App .logo {
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 24px;
+  width: 100px;
 }

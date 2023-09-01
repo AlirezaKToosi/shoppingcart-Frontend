@@ -1,0 +1,37 @@
+#login {
+  background-color: #ffffff;
+  height: 667px;
+  position: relative;
+  width: 375px;
+}
+
+#login .shopping-image {
+  height: 200px;
+  left: 54px;
+  object-fit: cover;
+  position: absolute;
+  top: 88px;
+  width: 267px;
+}
+
+#login .logo-image {
+  height: 40px;
+  left: 24px;
+  position: absolute;
+  top: 24px;
+  width: 100px;
+}
+
+#login .formullary {
+  height: 238px;
+  left: 40px;
+  position: absolute;
+  top: 355px;
+  width: 295px;
+}
+#login .input-Email {
+  left: 0 !important;
+  position: absolute !important;
+  top: 93px !important;
+  width: 295px !important;
+}

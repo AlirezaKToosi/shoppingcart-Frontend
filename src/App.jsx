@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 // 2. Project file
-import Login from "./components/Login";
-import TodoList from "./components/TodoList";
-import "./style/components/App.css";
+import Login from "./pages/Login";
+import TodoList from "./pages/TodoList";
+import "./style/App.css";
 
 // Functionl Component (FC) with 1 line export shorcut
 export default function App() {
