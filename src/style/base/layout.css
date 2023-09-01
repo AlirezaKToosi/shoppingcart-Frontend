@@ -1,15 +1,6 @@
-body {
-  background-color: #ffffff;
-  position: relative;
+.center {
+  text-align: center;
 }
-
-.App {
-  background-color: #ffffff;
-}
-.App .logo {
-  height: 40px;
-  left: 24px;
-  position: absolute;
-  top: 24px;
-  width: 100px;
+.left {
+  text-align: left;
 }

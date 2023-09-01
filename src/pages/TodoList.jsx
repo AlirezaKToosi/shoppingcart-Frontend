@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 // 2. Project file
 import "../style/pages/todolist.css";
 import Item from "../components/Item";
+import logo from "../assets/logo.svg";
 
 // Functionl Component (FC) with 1 line export shorcut
 export default function TodoList({ user, onSignout }) {
@@ -125,13 +126,23 @@ export default function TodoList({ user, onSignout }) {
   ));
   // 8. Render
   return (
-    <div className="todo-list-container">
-      <h3>Welcome, {user}!</h3>
-      <button className="signout-button" onClick={onSignout}>
-        Sign Out
-      </button>
-      <h3>Your Todo List:</h3>
-      <ul>{Items}</ul>
+    <div className="todo-list-container center">
+      <div className="topLogo">
+        <img src={logo} alt="logo" />
+      </div>
+      <p className="title">{"Shopping List"}</p>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          width: "100%",
+          marginBottom: "10px",
+          marginTop: "10px",
+        }}
+      >
+        {Items}
+      </div>
       <div className="add-item-container">
         <h2>Add New Item</h2>
         <input
@@ -153,10 +164,13 @@ export default function TodoList({ user, onSignout }) {
           placeholder="Image URL"
           onChange={handleImageUpload}
         />
-        <button className="add-button" onClick={handleAddItem}>
+        <button className="buttonMain" onClick={handleAddItem}>
           Add Item
         </button>
       </div>
+      <button className="signout-button" onClick={onSignout}>
+        Sign Out
+      </button>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "../style/App.css";
+import "../style/style.css";
+import logo from "../assets/logo.svg";
+import shoppingImage from "../assets/shoppingimage.png";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -30,24 +32,44 @@ const Login = ({ onLogin }) => {
       console.error(error);
     }
   };
+
   // 8. Render
   return (
-    <div id="login">
-      <h2>Login</h2>
-      <input
-        className="input-Email"
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+    <div className="login-area center">
+      <div className="topLogo">
+        <img src={logo} alt="logo" />
+      </div>
+      <img
+        src={shoppingImage}
+        style={{ height: "200px", width: "267px" }}
+        alt="shopping"
       />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+      <p className="title">{"EIKA's shopping list"}</p>
+
+      <div className="login-container">
+        <label className="login-title">Email</label>
+        <input
+          className="login-input"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
+      <div className="login-container">
+        <label className="login-title">Password</label>
+        <input
+          className="login-input"
+          type="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <button className="buttonMain" onClick={handleLogin}>
+        Login
+      </button>
       <p className="error-message">{errorMessage}</p>
     </div>
   );

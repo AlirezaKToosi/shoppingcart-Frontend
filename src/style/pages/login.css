@@ -1,37 +1,34 @@
-#login {
-  background-color: #ffffff;
-  height: 667px;
-  position: relative;
+.login-area {
   width: 375px;
+  height: 667px;
+  background-color: white;
+  padding: 20px;
+  margin: 0 auto;
+  overflow-y: scroll;
+}
+.login-container {
+  width: 295px;
+  text-align: left;
+  margin: 10px auto;
+}
+.topLogo {
+  text-align: left;
 }
 
-#login .shopping-image {
-  height: 200px;
-  left: 54px;
-  object-fit: cover;
-  position: absolute;
-  top: 88px;
-  width: 267px;
-}
-
-#login .logo-image {
+.topLogo img {
   height: 40px;
-  left: 24px;
-  position: absolute;
-  top: 24px;
   width: 100px;
 }
-
-#login .formullary {
-  height: 238px;
-  left: 40px;
-  position: absolute;
-  top: 355px;
-  width: 295px;
+.login-title {
+  font-family: NotoSans-Bold;
 }
-#login .input-Email {
-  left: 0 !important;
-  position: absolute !important;
-  top: 93px !important;
-  width: 295px !important;
+.title {
+  width: "100%";
+  text-align: center;
+  font-family: "Roboto";
+  font-weight: "700";
+  font-size: 24px;
+  line-height: 35px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
